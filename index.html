@@ -1,205 +1,579 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Games Hub — Privacy Policy" />
-  <title>Games Hub — Privacy Policy</title>
-  <style>
-    :root {
-      --bg: #0f0f0f;
-      --bg-card: #1a1a1a;
-      --text: #ffffff;
-      --text-muted: #888888;
-      --border: #2a2a2a;
-      --max-width: 720px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Games Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --border: rgba(255,255,255,0.07);
+    --accent: #ff4d8d;
+    --accent2: #7c5cfc;
+    --accent3: #00e5ff;
+    --text: #f0f0f8;
+    --muted: #7a7a9a;
+    --candy1: #ff4d8d;
+    --candy2: #ffb347;
+    --candy3: #7c5cfc;
+    --candy4: #00e5ff;
+  }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: linear-gradient(180deg, var(--bg) 0%, #1a1a1a 50%, var(--bg) 100%);
-      color: var(--text);
-      line-height: 1.6;
-      min-height: 100vh;
-    }
+  html { scroll-behavior: smooth; }
 
-    header {
-      text-align: center;
-      padding: 3rem 1.5rem 2rem;
-      border-bottom: 1px solid var(--border);
-    }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-    header h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
-    }
+  /* === NOISE TEXTURE === */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.4;
+  }
 
-    header p {
-      color: var(--text-muted);
-      font-size: 1rem;
-    }
+  /* === FLOATING CANDY ORBS === */
+  .orbs {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .orb {
+    position: absolute; border-radius: 50%;
+    filter: blur(80px); opacity: 0.12;
+    animation: drift linear infinite;
+  }
+  .orb:nth-child(1) { width:500px; height:500px; background:var(--accent); top:-100px; left:-100px; animation-duration:20s; }
+  .orb:nth-child(2) { width:400px; height:400px; background:var(--accent2); bottom:-80px; right:-80px; animation-duration:25s; animation-direction:reverse; }
+  .orb:nth-child(3) { width:300px; height:300px; background:var(--accent3); top:40%; left:60%; animation-duration:18s; animation-delay:-8s; }
 
-    main {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 2rem 1.5rem 4rem;
-    }
+  @keyframes drift {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(30px,-20px) scale(1.05); }
+    66% { transform: translate(-20px,30px) scale(0.97); }
+  }
 
-    section {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-    }
+  /* === LAYOUT === */
+  .wrapper { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; padding: 0 24px 80px; }
 
-    section h2 {
-      font-size: 1.5rem;
-      margin-bottom: 1.25rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid var(--border);
-    }
+  /* === HEADER === */
+  header {
+    padding: 40px 0 0;
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center;
+    animation: fadeUp 0.7s ease both;
+  }
 
-    section h3 {
-      font-size: 1.1rem;
-      margin: 1.5rem 0 0.5rem;
-      color: var(--text);
-    }
+  .app-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 8px 20px 8px 10px;
+    margin-bottom: 28px;
+    font-size: 13px; color: var(--muted);
+    backdrop-filter: blur(10px);
+  }
+  .app-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .app-badge span { color: var(--text); font-weight: 500; }
 
-    section p,
-    section li {
-      color: #cccccc;
-      margin-bottom: 0.75rem;
-    }
+  header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #fff 30%, var(--accent) 70%, var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
 
-    section ul {
-      padding-left: 1.25rem;
-      margin-bottom: 1rem;
-    }
+  .meta-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(124,92,252,0.12);
+    border: 1px solid rgba(124,92,252,0.25);
+    border-radius: 999px; padding: 6px 16px;
+    font-size: 13px; color: var(--muted);
+    margin-bottom: 48px;
+  }
+  .meta-pill::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--accent2); display:block; animation: pulse 2s ease infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
 
-    section li {
-      margin-bottom: 0.5rem;
-    }
+  /* === DIVIDER === */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border) 30%, var(--border) 70%, transparent);
+    margin: 0 0 48px;
+  }
 
-    .meta {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      margin-top: 1.5rem;
-    }
+  /* === QUICK SUMMARY === */
+  .summary-grid {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 12px;
+    margin-bottom: 56px;
+    animation: fadeUp 0.7s 0.15s ease both;
+  }
+  .summary-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 20px 16px;
+    text-align: center; transition: transform 0.2s, border-color 0.2s;
+  }
+  .summary-card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.14); }
+  .summary-card .icon { font-size: 24px; margin-bottom: 8px; }
+  .summary-card .label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .summary-card .value { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; color: var(--text); }
 
-    footer {
-      text-align: center;
-      padding: 2rem 1.5rem;
-      color: var(--text-muted);
-      font-size: 0.875rem;
-      border-top: 1px solid var(--border);
-    }
-  </style>
+  /* === SECTIONS === */
+  .section {
+    margin-bottom: 36px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px; overflow: hidden;
+    animation: fadeUp 0.6s ease both;
+    transition: border-color 0.3s;
+  }
+  .section:hover { border-color: rgba(255,255,255,0.12); }
+
+  .section-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 22px 24px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer; user-select: none;
+  }
+  .section-num {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700;
+    color: #fff; flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px; font-weight: 700; flex: 1;
+    color: var(--text);
+  }
+  .chevron {
+    width: 20px; height: 20px; color: var(--muted);
+    transition: transform 0.3s;
+  }
+  .section.open .chevron { transform: rotate(180deg); }
+
+  .section-body {
+    padding: 0 24px;
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.3s;
+  }
+  .section.open .section-body { max-height: 600px; padding: 20px 24px 24px; }
+
+  .section-body p {
+    color: #b0b0cc; line-height: 1.75; font-size: 15px;
+    margin-bottom: 14px;
+  }
+  .section-body p:last-child { margin-bottom: 0; }
+
+  .section-body ul {
+    list-style: none; display: flex; flex-direction: column; gap: 10px;
+    margin-bottom: 14px;
+  }
+  .section-body ul li {
+    display: flex; align-items: flex-start; gap: 10px;
+    color: #b0b0cc; font-size: 15px; line-height: 1.65;
+  }
+  .section-body ul li::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    margin-top: 7px; flex-shrink: 0;
+  }
+
+  .highlight-box {
+    background: rgba(124,92,252,0.08);
+    border: 1px solid rgba(124,92,252,0.2);
+    border-radius: 12px; padding: 14px 18px;
+    font-size: 14px; color: #a0a0c0; line-height: 1.6;
+    margin-top: 14px;
+  }
+  .highlight-box strong { color: var(--text); }
+
+  /* === CANDY CATCHER BANNER === */
+  .candy-banner {
+    background: linear-gradient(135deg, #1a0d2e, #0d1a2e);
+    border: 1px solid rgba(124,92,252,0.3);
+    border-radius: 20px; padding: 28px 28px;
+    margin-bottom: 36px;
+    display: flex; align-items: center; gap: 20px;
+    overflow: hidden; position: relative;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .candy-banner::before {
+    content: '🍬🍭🧁';
+    position: absolute; right: 24px; top: 50%; transform: translateY(-50%);
+    font-size: 36px; opacity: 0.2; letter-spacing: 8px;
+  }
+  .candy-banner-icon {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+  }
+  .candy-banner-text h3 {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px;
+    margin-bottom: 4px;
+  }
+  .candy-banner-text p { color: var(--muted); font-size: 13px; line-height: 1.5; }
+
+  /* === PACKAGE INFO === */
+  .pkg-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 14px; padding: 16px 20px;
+    display: flex; align-items: center; gap: 12px;
+    font-size: 13px;
+    margin-bottom: 36px;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .pkg-label { color: var(--muted); flex-shrink: 0; }
+  .pkg-value {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    color: var(--accent3); word-break: break-all;
+  }
+
+  /* === FOOTER === */
+  footer {
+    text-align: center; padding: 48px 0 0;
+    animation: fadeUp 0.6s 0.5s ease both;
+  }
+  .footer-logo {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px;
+    margin-bottom: 16px;
+  }
+  .footer-logo .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent); display: inline-block;
+    animation: pulse 2s ease infinite;
+  }
+  footer p { color: var(--muted); font-size: 13px; line-height: 1.7; }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  .store-badges {
+    display: flex; justify-content: center; gap: 12px;
+    margin-top: 24px;
+  }
+  .badge {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 10px 20px;
+    font-size: 13px; color: var(--text);
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: default;
+  }
+  .badge:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
+
+  /* === SCROLL PROGRESS === */
+  #progress {
+    position: fixed; top: 0; left: 0; height: 3px; z-index: 100;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+    width: 0%; transition: width 0.1s;
+    border-radius: 0 2px 2px 0;
+  }
+
+  /* === BACK TO TOP === */
+  #backtop {
+    position: fixed; bottom: 28px; right: 24px; z-index: 99;
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; opacity: 0; transform: translateY(10px);
+    transition: opacity 0.3s, transform 0.3s, border-color 0.2s;
+    color: var(--muted);
+  }
+  #backtop.visible { opacity: 1; transform: translateY(0); }
+  #backtop:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Stagger sections */
+  .section:nth-child(1) { animation-delay: 0.1s; }
+  .section:nth-child(2) { animation-delay: 0.15s; }
+  .section:nth-child(3) { animation-delay: 0.2s; }
+  .section:nth-child(4) { animation-delay: 0.25s; }
+  .section:nth-child(5) { animation-delay: 0.3s; }
+  .section:nth-child(6) { animation-delay: 0.35s; }
+  .section:nth-child(7) { animation-delay: 0.4s; }
+  .section:nth-child(8) { animation-delay: 0.45s; }
+  .section:nth-child(9) { animation-delay: 0.5s; }
+
+  @media (max-width: 500px) {
+    .summary-grid { grid-template-columns: repeat(3,1fr); gap: 8px; }
+    .summary-card { padding: 14px 8px; }
+    .summary-card .value { font-size: 12px; }
+    .candy-banner-icon { width: 44px; height: 44px; font-size: 22px; }
+    .section-header { padding: 18px 16px; }
+    .section.open .section-body { padding: 16px; }
+  }
+</style>
 </head>
 <body>
+
+<div id="progress"></div>
+<div class="orbs"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
+
+<div class="wrapper">
+
+  <!-- HEADER -->
   <header>
-    <h1>Games Hub</h1>
-    <p>Casual games, one tap away</p>
+    <div class="app-badge">
+      <div class="app-icon">🎮</div>
+      <span>Games Hub</span>
+      <span style="color:var(--muted)">· Casual games, one tap away</span>
+    </div>
+    <h1>Privacy Policy</h1>
+    <div class="meta-pill">Last updated: May 23, 2026</div>
   </header>
 
-  <main>
-    <section id="privacy">
-      <h2>Privacy Policy</h2>
-      <p class="meta">Last updated: May 23, 2026</p>
+  <div class="divider"></div>
 
-      <p>
-        This Privacy Policy describes how <strong>Games Hub</strong> (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or
-        &ldquo;the app&rdquo;) handles information when you use our mobile application. By using Games Hub,
-        you agree to the practices described below.
-      </p>
+  <!-- QUICK SUMMARY CARDS -->
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="icon">🔒</div>
+      <div class="label">Account</div>
+      <div class="value">Not Required</div>
+    </div>
+    <div class="summary-card">
+      <div class="icon">🚫</div>
+      <div class="label">Ads</div>
+      <div class="value">Ad-Free</div>
+    </div>
+    <div class="summary-card">
+      <div class="icon">💸</div>
+      <div class="label">Data Sold</div>
+      <div class="value">Never</div>
+    </div>
+  </div>
 
-      <h3>1. Information we collect</h3>
-      <p>
-        Games Hub is designed to be simple. We do not require you to create an account to use the app.
-        We may collect limited technical information that your device and app stores automatically, such as:
-      </p>
-      <ul>
-        <li>Device type, operating system version, and app version (for stability and compatibility)</li>
-        <li>Basic crash or error logs if you choose to share them through your device&rsquo;s system reporting</li>
-      </ul>
-      <p>
-        We do not knowingly collect sensitive personal information such as payment details, government IDs,
-        or precise location through Games Hub itself.
-      </p>
+  <!-- CANDY CATCHER FEATURE BANNER -->
+  <div class="candy-banner">
+    <div class="candy-banner-icon">🍬</div>
+    <div class="candy-banner-text">
+      <h3>Featured: Candy Catcher</h3>
+      <p>Move your bucket, catch candies, chase the high score — no account, no tracking, just fun.</p>
+    </div>
+  </div>
 
-      <h3>2. Games and third-party content</h3>
-      <p>
-        Games Hub displays games inside the app using embedded web content hosted by third parties.
-        When you play a game, that content may use cookies, local storage, or similar technologies according
-        to the third party&rsquo;s own policies. We encourage you to review the privacy practices of any
-        external game or website you interact with through the app.
-      </p>
+  <!-- SECTIONS -->
+  <div id="sections">
 
-      <h3>3. How we use information</h3>
-      <p>We use information only to:</p>
-      <ul>
-        <li>Provide and improve the app experience</li>
-        <li>Maintain security and fix bugs</li>
-        <li>Comply with legal obligations where applicable</li>
-      </ul>
+    <div class="section open">
+      <div class="section-header" onclick="toggle(this)">
+        <div class="section-num">1</div>
+        <div class="section-title">Information We Collect</div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="section-body">
+        <p>Games Hub is designed to be simple. We do not require you to create an account to use the app. We may collect limited technical information that your device and app stores automatically:</p>
+        <ul>
+          <li>Device type, operating system version, and app version (for stability and compatibility)</li>
+          <li>Basic crash or error logs if you choose to share them through your device's system reporting</li>
+        </ul>
+        <p>We do not knowingly collect sensitive personal information such as payment details, government IDs, or precise location through Games Hub itself.</p>
+      </div>
+    </div>
 
-      <h3>4. Data sharing</h3>
-      <p>
-        We do not sell your personal information. We may share limited data only when necessary to:
-      </p>
-      <ul>
-        <li>Operate app distribution platforms (such as Google Play or the App Store)</li>
-        <li>Comply with law or protect the rights and safety of users</li>
-        <li>Work with service providers who help us host or maintain the app, under confidentiality obligations</li>
-      </ul>
+    <div class="section">
+      <div class="section-header" onclick="toggle(this)">
+        <div class="section-num">2</div>
+        <div class="section-title">Games & Third-Party Content</div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="section-body">
+        <p>Games Hub displays games inside the app using embedded web content hosted by third parties. When you play a game, that content may use cookies, local storage, or similar technologies according to the third party's own policies.</p>
+        <div class="highlight-box">
+          <strong>Heads up:</strong> We encourage you to review the privacy practices of any external game or website you interact with through the app.
+        </div>
+      </div>
+    </div>
 
-      <h3>5. Children&rsquo;s privacy</h3>
-      <p>
-        Games Hub is intended for a general audience. We do not knowingly collect personal information from
-        children under 13 (or the minimum age required in your region) without parental consent. If you believe
-        a child has provided personal information through the app, please contact us so we can take appropriate steps.
-      </p>
+    <div class="section">
+      <div class="section-header" onclick="toggle(this)">
+        <div class="section-num">3</div>
+        <div class="section-title">How We Use Information</div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="section-body">
+        <p>We use information only to:</p>
+        <ul>
+          <li>Provide and improve the app experience</li>
+          <li>Maintain security and fix bugs</li>
+          <li>Comply with legal obligations where applicable</li>
+        </ul>
+      </div>
+    </div>
 
-      <h3>6. Data retention and security</h3>
-      <p>
-        We retain information only as long as needed for the purposes described in this policy. We use
-        reasonable measures to protect information, but no method of transmission or storage is completely secure.
-      </p>
+    <div class="section">
+      <div class="section-header" onclick="toggle(this)">
+        <div class="section-num">4</div>
+        <div class="section-title">Data Sharing</div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="section-body">
+        <p>We do not sell your personal information. We may share limited data only when necessary to:</p>
+        <ul>
+          <li>Operate app distribution platforms (such as Google Play or the App Store)</li>
+          <li>Comply with law or protect the rights and safety of users</li>
+          <li>Work with service providers who help us host or maintain the app, under confidentiality obligations</li>
+        </ul>
+      </div>
+    </div>
 
-      <h3>7. Your choices</h3>
-      <p>You can:</p>
-      <ul>
-        <li>Uninstall the app at any time to stop further use of Games Hub on your device</li>
-        <li>Adjust device permissions (such as network access) in your system settings</li>
-        <li>Clear app data or cache through your device settings where supported</li>
-      </ul>
+    <div class="section">
+      <div class="section-header" onclick="toggle(this)">
+        <div class="section-num">5</div>
+        <div class="section-title">Children's Privacy</div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="section-body">
+        <p>Games Hub is intended for a general audience. We do not knowingly collect personal information from children under 13 (or the minimum age required in your region) without parental consent.</p>
+        <div class="highlight-box">
+          If you believe a child has provided personal information through the app, please <strong>contact us</strong> so we can take appropriate steps.
+        </div>
+      </div>
+    </div>
 
-      <h3>8. Changes to this policy</h3>
-      <p>
-        We may update this Privacy Policy from time to time. The &ldquo;Last updated&rdquo; date at the top
-        will reflect changes. Continued use of the app after updates means you accept the revised policy.
-      </p>
+    <div class="section">
+      <div class="section-header" onclick="toggle(this)">
+        <div class="section-num">6</div>
+        <div class="section-title">Data Retention & Security</div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="section-body">
+        <p>We retain information only as long as needed for the purposes described in this policy. We use reasonable measures to protect information, but no method of transmission or storage is completely secure.</p>
+      </div>
+    </div>
 
-      <h3>9. Contact us</h3>
-      <p>
-        If you have questions about this Privacy Policy or Games Hub, please contact the developer through
-        the support email listed on your app&rsquo;s store listing (Google Play or App Store).
-      </p>
+    <div class="section">
+      <div class="section-header" onclick="toggle(this)">
+        <div class="section-num">7</div>
+        <div class="section-title">Your Choices</div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="section-body">
+        <p>You have full control:</p>
+        <ul>
+          <li>Uninstall the app at any time to stop further use of Games Hub on your device</li>
+          <li>Adjust device permissions (such as network access) in your system settings</li>
+          <li>Clear app data or cache through your device settings where supported</li>
+        </ul>
+      </div>
+    </div>
 
-      <p class="meta">Package name (Android): com.dev.asitsingh18.GamesHub</p>
-    </section>
-  </main>
+    <div class="section">
+      <div class="section-header" onclick="toggle(this)">
+        <div class="section-num">8</div>
+        <div class="section-title">Changes to This Policy</div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="section-body">
+        <p>We may update this Privacy Policy from time to time. The "Last updated" date at the top will reflect changes. Continued use of the app after updates means you accept the revised policy.</p>
+      </div>
+    </div>
 
+    <div class="section">
+      <div class="section-header" onclick="toggle(this)">
+        <div class="section-num">9</div>
+        <div class="section-title">Contact Us</div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="section-body">
+        <p>If you have questions about this Privacy Policy or Games Hub, please contact the developer through the support email listed on your app's store listing (Google Play or App Store).</p>
+        <div class="highlight-box">
+          Find our contact details on the store page for <strong>Games Hub</strong>.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PACKAGE NAME -->
+  <div class="pkg-card" style="margin-top:36px">
+    <span class="pkg-label">📦 Android Package</span>
+    <span class="pkg-value">com.dev.asitsingh18.GamesHub</span>
+  </div>
+
+  <!-- FOOTER -->
   <footer>
-    <p>&copy; 2026 Games Hub. All rights reserved.</p>
+    <div class="footer-logo">Games Hub <span class="dot"></span></div>
+    <p>Your pocket arcade: pick a game, play in fullscreen, chase the high score.</p>
+    <p style="margin-top:8px">© 2026 Games Hub · All rights reserved</p>
+    <div class="store-badges">
+      <div class="badge">🤖 Google Play</div>
+      <div class="badge">🍎 App Store</div>
+    </div>
   </footer>
+
+</div>
+
+<!-- BACK TO TOP -->
+<button id="backtop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<script>
+  // Accordion toggle
+  function toggle(header) {
+    const section = header.parentElement;
+    section.classList.toggle('open');
+  }
+
+  // Scroll progress bar
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const scrollTop = window.scrollY;
+    const scrollHeight = doc.scrollHeight - doc.clientHeight;
+    const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+    document.getElementById('progress').style.width = pct + '%';
+
+    const btn = document.getElementById('backtop');
+    scrollTop > 300 ? btn.classList.add('visible') : btn.classList.remove('visible');
+  });
+
+  // Intersection observer for staggered section animation
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.section').forEach((s, i) => {
+    s.style.opacity = '0';
+    s.style.transform = 'translateY(18px)';
+    s.style.transition = `opacity 0.5s ${i * 0.06}s ease, transform 0.5s ${i * 0.06}s ease, border-color 0.3s`;
+    obs.observe(s);
+  });
+</script>
 </body>
 </html>
